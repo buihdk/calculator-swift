@@ -93,6 +93,9 @@ class ViewController: UIViewController {
             return NSNumberFormatter().numberFromString(display.text!)?.doubleValue
         }
         set {
+        // newValue is a magical variable that means "whatever the caller is setting displayValue to". Therefore
+        // newValue will always be whatever type displayValue is, which in this case is a (Double?). Therefore in
+        // line 100, you have to unwrap it. Otherwise, f/e it will show Optional(3) if you set displayValue to 3.
             if newValue != nil {
                 display.text = "\(newValue!)"
                 userIsTyping = false
