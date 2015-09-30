@@ -91,7 +91,7 @@ class ViewController: UIViewController {
         }
         set {
             if newValue != nil {
-                display.text = "\(newValue)"
+                display.text = "\(newValue!)"
                 userIsTyping = false
             } else {
                 display.text = "0"
