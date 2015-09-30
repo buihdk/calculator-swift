@@ -60,6 +60,8 @@ class ViewController: UIViewController {
             } else {
                 display.text = "0"
             }
+            
+            // If you set user is typing to false every time this executes, it'll only let you backspace once. Fix.
             userIsTyping = false
         }
     }
@@ -72,6 +74,7 @@ class ViewController: UIViewController {
                 display.text = String(display.text!.characters.dropFirst())
             }
         }
+        // If the user isn't typing, this should act like a Unary function (such as sin, cos, or square root).
     }
     
     
