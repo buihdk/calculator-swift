@@ -27,7 +27,6 @@ class ViewController: UIViewController {
                     return
                 }
             }
-            
             display.text = display.text! + sender.currentTitle!
         } else {
             display.text = sender.currentTitle!
@@ -41,7 +40,15 @@ class ViewController: UIViewController {
     @IBAction func operate(sender: UIButton) {
         history.text = history.text! + "[" + sender.currentTitle! + "]"
         if userIsTyping {
-            enter()
+//            if sender.currentTitle! == "ᐩ/-" {
+//                if display.text!.rangeOfString("-") == nil {
+//                    display.text = "-" + display.text!
+//                } else {
+//                    display.text = String(display.text!.characters.dropFirst())
+//                }
+//            } else {
+                enter()
+//            }
         }
         if let operation = sender.currentTitle {
             if let result = brain.performOperation(operation) {
@@ -59,27 +66,26 @@ class ViewController: UIViewController {
                 display.text = String(display.text!.characters.dropLast())
             } else {
                 display.text = "0"
+                userIsTyping = false
             }
-            
-            // If you set user is typing to false every time this executes, it'll only let you backspace once. Fix.
-            userIsTyping = false
         }
     }
-
-    @IBAction func changeSign() {
+    
+    @IBAction func changeSign(sender: UIButton) {
         if userIsTyping {
             if display.text!.rangeOfString("-") == nil {
                 display.text = "-" + display.text!
             } else {
                 display.text = String(display.text!.characters.dropFirst())
             }
+        } else {
+            let result = brain.performOperation("ᐩ/-")
+            displayValue = result
         }
-        // If the user isn't typing, this should act like a Unary function (such as sin, cos, or square root).
     }
     
-    
     @IBAction func enter() {
-        history.text = history.text! + "[" + "\(displayValue)" + "]"
+        history.text = history.text! + "[" + "\(displayValue!)" + "]"
         userIsTyping = false
         if let result = brain.pushOperand(displayValue!) {
             displayValue = result
@@ -113,4 +119,3 @@ class ViewController: UIViewController {
     }
     
 }
-
